@@ -1,13 +1,13 @@
 // alternative to displayMovements using node creation and fragments
 function displayMovements(movements) {
   containerMovements.textContent = '';
-  const rootClass = 'movements__'
+  const rootClass = 'movements__';
   const movementRows = document.createDocumentFragment();
-  movements.forEach((data) => {
+  movements.forEach(data => {
     const movementType = data > 0 ? 'deposit' : 'withdrawal';
     const row = document.createElement('div');
     const value = document.createElement('div');
-    const date = document.createElement('div'); 
+    const date = document.createElement('div');
     const type = document.createElement('div');
     row.classList.add(`${rootClass}row`);
     value.classList.add(`${rootClass}value`);
@@ -24,3 +24,14 @@ function displayMovements(movements) {
   });
   containerMovements.appendChild(movementRows);
 }
+
+// if we wanted to creat a new array, map is the way to go
+const createUsernames = function (accounts) {
+  return accounts.map(account =>
+    account.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('')
+  );
+};

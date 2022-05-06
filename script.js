@@ -65,7 +65,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 const moneyFormatter = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
   currency: 'BRL',
-  minimumFractionDigits: 2
+  minimumFractionDigits: 2,
 });
 
 function displayMovements(movements) {
@@ -74,15 +74,27 @@ function displayMovements(movements) {
     const type = data > 0 ? 'deposit' : 'withdrawal';
     const template = `
     <div class="movements__row">
-      <div class="movements__type movements__type--${type}">${i + 1} - ${type}</div>
+      <div class="movements__type movements__type--${type}">
+        ${i + 1} - ${type}
+      </div>
       <div class="movements__date">Yesterday</div>
       <div class="movements__value">${moneyFormatter.format(data)}</div>
     </div>`;
-    containerMovements.insertAdjacentHTML("afterbegin", template);
+    containerMovements.insertAdjacentHTML('afterbegin', template);
   });
 }
-
 displayMovements(account1.movements);
+
+const createUsernames = function (accounts) {
+  accounts.forEach(function (account) {
+    account.username = account.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
