@@ -85,6 +85,12 @@ function displayMovements(movements) {
 }
 displayMovements(account1.movements);
 
+function updateUserBalance(movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov);
+  labelBalance.textContent = moneyFormatter.format(balance);
+}
+updateUserBalance(account1.movements);
+
 const createUsernames = function (accounts) {
   accounts.forEach(function (account) {
     account.username = account.owner
